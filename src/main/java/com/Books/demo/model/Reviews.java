@@ -1,5 +1,5 @@
 package com.Books.demo.model;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,9 +15,9 @@ public class Reviews {
     @Column(name = "review_id", nullable = false)
     private Integer reviewId;
     private String description;
-    @Column(name = "book_id", nullable = false)
-    private Integer bookId;
     private Integer rating;
-
-
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id")
+    private Books book;
 }
